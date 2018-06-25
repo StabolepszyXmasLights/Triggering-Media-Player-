@@ -2,6 +2,8 @@ import os
 from time import sleep
 import RPi.GPIO as GPIO
 
+import subprocess
+
 indexPin = 17
 indexPin2 = 27
 
@@ -14,6 +16,7 @@ GPIO.setup(indexPin2, GPIO.IN)
 
 def my_callback(channel):
     print("GPIO" + str(channel) + " changed to " + str(GPIO.input(channel)))
+    subprocess.call(["omxplayer -b " + video1])
 
 GPIO.add_event_detect(indexPin, GPIO.FALLING, callback=my_callback)
 GPIO.add_event_detect(indexPin2, GPIO.FALLING, callback=my_callback)
